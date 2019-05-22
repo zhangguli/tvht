@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02高级焦点图</title>
+    <style>
+        *{margin: 0; padding: 0; border: none; list-style: none;}
+        img{vertical-align: top;}
+        .all{width: 640px; height: 270px; border: 1px solid #ccc; margin: 100px auto; padding: 5px; position: relative;}
+        .all .show{ overflow: hidden;  width: 640px; height: 270px; ; position: relative;z-index: 1;}
+        .all ul{width: 99999999999px;overflow: hidden; position: absolute; left: 0; top: 0;}
+        .all li{ float: left;}
+        .all span{width: 45px;height: 45px; position: absolute; background: pink; top: 50%; margin-top: -23px;cursor: pointer; z-index: 2;}
+        .all .left{left: 0; background: url("images/high/btn_l.png");}
+        .all .right{right: 0; background: url("images/high/btn_r.png");}
+    </style>
+</head>
+<body>
+    <div class="all">
+        <div class="show">
+            <ul id="ul">
+                <li><img src="images/high/01.jpg" alt=""></li>
+                <li><img src="images/high/02.jpg" alt=""></li>
+                <li><img src="images/high/03.jpg" alt=""></li>
+                <li><img src="images/high/04.jpg" alt=""></li>
+                <li><img src="images/high/05.jpg" alt=""></li>
+                <li><img src="images/high/01.jpg" alt=""></li>
+            </ul>
+
+        </div>
+        <span id="left" class="left"></span>
+        <span id="right" class="right"></span>
+    </div>
+</body>
+</html>
+
+<script>
+    // 1. 获取相关元素
+    var oleft = document.getElementById('left')
+    var oright = document.getElementById('right')
+    var oul = document.getElementById('ul')
+
+    //2.设置累加器
+    var num = 0;//累加器，目的是为了记录当前这一张
+
+    //4.开启一个定时器中的步数
+    var step = 0;//累加器，让图片运动起来
+    var timer = null;//定时器名称
+
+
+    //3.单击右按钮让Ul切换下一张  （有动画）
+    oright.onclick = function () {
+        //3.1累加器生效 ，一次只能加1，目的是为了显示下一张
+        num++;
+        //3.3 公式   只能在 0-4之间循环切换 //6.2  num现在取值是0-5之间循环切换
+        num = (num+oul.children.length)%oul.children.length
+        /*//3.2 给ul使用num*640 让ul动起来显示 不同的图片。
+        oul.style.left = -num*640+'px'*/
+        // 6 无缝动画  在html中将第一张图片复制一份,到ul内部的最后
+            //6.1bug 到达复制后第一张之后,再点还是首状态第一张.
+            // 解决办法,到达.让先其全部回到第一张,step也修改为0下次,再运动时,是从首状态的第一张开始去到到第二张.
+        if(num==0) {
+            step = 0;// 如果不设置为0 会直接到达目的地,因为在定时器里面判断了 step>target,满足条件直接到达目的.所以就没有中间运动的过程.所以一定要写为0
+            oul.style.left = 0;//瞬间 到达第一张. 再切换到第二张就会有动画
+            num = 1;//让其正确的显示第二张图片
+        }
+        //4.2 设置到达的目标位置
+        var target = num*640 //1*640
+        //4.4 清除定时器，因为在事件指令中
+        clearInterval(timer)
+        //4.3开启定时器 目的是为什么？ 是让图片慢慢的过渡到下一张
+        timer = setInterval(function () {
+            //4.3.1 让step 累加器生效
+            step+=40;
+            //4.3.3 不能让定时器一直走，到达目标以后就清除定时器
+             //3200 > 640
+            if(step>target){
+                clearInterval(timer)
+                step = target;
+            }
+            //4.3.2 让ul 动起来，使用的是step的值
+            oul.style.left = -step+'px'
+        },30)
+    }
+    //单击左按钮让Ul切换上一张  （有动画）
+    oleft.onclick = function () {
+        num--;
+        num = (num+oul.children.length)%oul.children.length
+        oul.style.left = -num*640+'px'
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>01无缝焦点图</title>
+    <style>
+        *{margin: 0; padding: 0; list-style:none;border: none;}
+        img{vertical-align: top;}
+        body{ background: #000;}
+        .all{width: 600px; height: 200px;border: 1px solid red; margin: 100px auto; overflow: hidden;  position: relative;}
+        .all ul{ width: 9999999999999999999px; overflow: hidden; position: absolute; left: 0; top: 0;}
+        .all li{ float: left;}
+    </style>
+</head>
+<body>
+<div class="all" id="all">
+    <ul id="ul">
+        <li><img src="images/01.jpg" alt=""></li>
+        <li><img src="images/02.jpg" alt=""></li>
+        <li><img src="images/03.jpg" alt=""></li>
+        <li><img src="images/04.jpg" alt=""></li>
+        <li><img src="images/01.jpg" alt=""></li>
+        <li><img src="images/02.jpg" alt=""></li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    //网页发布自动播放
+        //自动播放 循环定时器， 定时器名称   累加器
+        //自动播放  要控制ul的运动
+    // 1.设置相关的定时器名称 和累加器名称
+    var timer = null; //定时器名称
+    var num = 0; //累加器名称
+    //4.1获取火车
+    var oul = document.getElementById('ul')
+    // 6 获取最大的范围
+    var oall = document.getElementById('all')
+
+    //2.开启定时器
+    /*timer= setInterval(function () {
+        // 3.累加器生效
+        num+=5
+        //5.修正num的值
+
+        if(num>1200){
+            num=0
+        }
+
+
+        //4.使用累加器 控制ul运动 也就是控制火车
+            //  4.2控制火车
+        oul.style.left = -num+'px'
+    },30)*/
+
+    // 8封装自动播放代码
+    function dongdong(){
+        timer= setInterval(function () {
+            // 3.累加器生效
+            num+=5
+            //5.修正num的值
+
+            if(num>1200){
+                num=0
+            }
+
+
+            //4.使用累加器 控制ul运动 也就是控制火车
+            //  4.2控制火车
+            oul.style.left = -num+'px'
+        },30)
+    }
+    //8.1调用才能开启自动播放
+    dongdong()
+
+
+    //鼠标移上，停止播放
+    oall.onmouseover = function(){
+        clearInterval(timer)
+    }
+
+
+    //7鼠标移开，继续播放
+    oall.onmouseout = function () {
+        // 8.2
+        dongdong()
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

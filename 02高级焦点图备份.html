@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02高级焦点图</title>
+    <style>
+        *{margin: 0; padding: 0; border: none; list-style: none;}
+        img{vertical-align: top;}
+        .all{width: 640px; height: 270px; border: 1px solid #ccc; margin: 100px auto; padding: 5px; overflow: hidden; position: relative;}
+        .all .show{ width: 640px; height: 270px; overflow: hidden; position: relative;z-index: 1;}
+        .all ul{width: 99999999999px;overflow: hidden; position: absolute; left: 0; top: 0;}
+        .all li{ float: left;}
+        .all span{width: 45px;height: 45px; position: absolute; background: pink; top: 50%; margin-top: -23px;cursor: pointer; z-index: 2;}
+        .all .left{left: 0; background: url("images/high/btn_l.png");}
+        .all .right{right: 0; background: url("images/high/btn_r.png");}
+    </style>
+</head>
+<body>
+    <div class="all">
+        <div class="show">
+            <ul>
+                <li><img src="images/high/01.jpg" width="640" height="270" alt=""></li>
+                <li><img src="images/high/02.jpg" alt=""></li>
+                <li><img src="images/high/03.jpg" alt=""></li>
+                <li><img src="images/high/04.jpg" alt=""></li>
+                <li><img src="images/high/05.jpg" alt=""></li>
+            </ul>
+        </div>
+        <span class="left"></span>
+        <span class="right"></span>
+    </div>
+</body>
+</html>
